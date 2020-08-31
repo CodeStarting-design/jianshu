@@ -1,26 +1,30 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+//作为整个页面的父组件
+import React, {PureComponent} from 'react';
+import {Provider} from 'react-redux' ;
+import Header from './common/header';
+import store from './store/index';
+import Home from './pages/home/index';
+import Detail from './pages/detail/loadable';
+import {BrowserRouter ,Route} from 'react-router-dom'
+import Login from './pages/login/index'
+import Writer from './pages/writer/index'
+class App extends PureComponent {
+ render(){
+   return( 
+     <Provider store={store}>
+     
+     <BrowserRouter>
+     <Header></Header>
+     <div>
+     <Route path='/' exact component={Home}></Route>
+     <Route path='/detail/:id' exact component={Detail}></Route>
+     <Route path='/login' exact component={Login}></Route>
+     <Route path='/writer' exact component={Writer}></Route>
+     </div>
+     </BrowserRouter>
+ 
+     </Provider>
+   );
+ }
 }
-
 export default App;
